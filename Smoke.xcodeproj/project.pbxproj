@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A57D604D230B426200053526 /* EditCookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57D604C230B426200053526 /* EditCookView.swift */; };
+		A59AB2082300B95C0028EF85 /* CookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59AB2072300B95C0028EF85 /* CookDetailView.swift */; };
 		A5F1E80F22F9CD25008D622A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E80E22F9CD25008D622A /* AppDelegate.swift */; };
 		A5F1E81122F9CD25008D622A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E81022F9CD25008D622A /* SceneDelegate.swift */; };
 		A5F1E81422F9CD25008D622A /* Smoke.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E81222F9CD25008D622A /* Smoke.xcdatamodeld */; };
@@ -16,6 +18,11 @@
 		A5F1E81E22F9CD26008D622A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5F1E81C22F9CD26008D622A /* LaunchScreen.storyboard */; };
 		A5F1E82922F9CD26008D622A /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E82822F9CD26008D622A /* SmokeTests.swift */; };
 		A5F1E83422F9CD26008D622A /* SmokeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E83322F9CD26008D622A /* SmokeUITests.swift */; };
+		A5F1E84422F9E970008D622A /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E84322F9E970008D622A /* CoreDataManager.swift */; };
+		A5F1E84722F9FA76008D622A /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E84622F9FA76008D622A /* NSManagedObjectContext+Extensions.swift */; };
+		A5F1E84A22F9FC35008D622A /* AddCookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E84922F9FC35008D622A /* AddCookViewModel.swift */; };
+		A5F1E84D22F9FC9B008D622A /* AddCookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E84C22F9FC9B008D622A /* AddCookView.swift */; };
+		A5F1E84F22FA0997008D622A /* CookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1E84E22FA0997008D622A /* CookListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A57D604C230B426200053526 /* EditCookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCookView.swift; sourceTree = "<group>"; };
+		A59AB2072300B95C0028EF85 /* CookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookDetailView.swift; sourceTree = "<group>"; };
 		A5F1E80B22F9CD25008D622A /* Smoke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smoke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F1E80E22F9CD25008D622A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5F1E81022F9CD25008D622A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +60,11 @@
 		A5F1E82F22F9CD26008D622A /* SmokeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmokeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F1E83322F9CD26008D622A /* SmokeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeUITests.swift; sourceTree = "<group>"; };
 		A5F1E83522F9CD26008D622A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5F1E84322F9E970008D622A /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A5F1E84622F9FA76008D622A /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		A5F1E84922F9FC35008D622A /* AddCookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCookViewModel.swift; sourceTree = "<group>"; };
+		A5F1E84C22F9FC9B008D622A /* AddCookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCookView.swift; sourceTree = "<group>"; };
+		A5F1E84E22FA0997008D622A /* CookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +115,11 @@
 		A5F1E80D22F9CD25008D622A /* Smoke */ = {
 			isa = PBXGroup;
 			children = (
+				A5F1E84122F9E4D0008D622A /* Views */,
+				A5F1E84B22F9FC68008D622A /* View Models */,
+				A5F1E84222F9E7CC008D622A /* Managers */,
 				A5F1E80E22F9CD25008D622A /* AppDelegate.swift */,
 				A5F1E81022F9CD25008D622A /* SceneDelegate.swift */,
-				A5F1E81522F9CD25008D622A /* ContentView.swift */,
 				A5F1E81722F9CD26008D622A /* Assets.xcassets */,
 				A5F1E81C22F9CD26008D622A /* LaunchScreen.storyboard */,
 				A5F1E81F22F9CD26008D622A /* Info.plist */,
@@ -137,6 +153,43 @@
 				A5F1E83522F9CD26008D622A /* Info.plist */,
 			);
 			path = SmokeUITests;
+			sourceTree = "<group>";
+		};
+		A5F1E84122F9E4D0008D622A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5F1E84522F9FA5A008D622A /* Extensions */,
+				A5F1E81522F9CD25008D622A /* ContentView.swift */,
+				A5F1E84C22F9FC9B008D622A /* AddCookView.swift */,
+				A59AB2072300B95C0028EF85 /* CookDetailView.swift */,
+				A57D604C230B426200053526 /* EditCookView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A5F1E84222F9E7CC008D622A /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A5F1E84322F9E970008D622A /* CoreDataManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		A5F1E84522F9FA5A008D622A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A5F1E84622F9FA76008D622A /* NSManagedObjectContext+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A5F1E84B22F9FC68008D622A /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				A5F1E84E22FA0997008D622A /* CookListViewModel.swift */,
+				A5F1E84922F9FC35008D622A /* AddCookViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,8 +325,15 @@
 			files = (
 				A5F1E81422F9CD25008D622A /* Smoke.xcdatamodeld in Sources */,
 				A5F1E80F22F9CD25008D622A /* AppDelegate.swift in Sources */,
+				A5F1E84F22FA0997008D622A /* CookListViewModel.swift in Sources */,
+				A59AB2082300B95C0028EF85 /* CookDetailView.swift in Sources */,
+				A57D604D230B426200053526 /* EditCookView.swift in Sources */,
 				A5F1E81622F9CD25008D622A /* ContentView.swift in Sources */,
+				A5F1E84422F9E970008D622A /* CoreDataManager.swift in Sources */,
+				A5F1E84D22F9FC9B008D622A /* AddCookView.swift in Sources */,
 				A5F1E81122F9CD25008D622A /* SceneDelegate.swift in Sources */,
+				A5F1E84722F9FA76008D622A /* NSManagedObjectContext+Extensions.swift in Sources */,
+				A5F1E84A22F9FC35008D622A /* AddCookViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
