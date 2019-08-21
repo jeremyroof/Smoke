@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct CookDetailView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
     
-    var cook: CookViewModel
+    
+    var cook: CookData
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -24,9 +27,9 @@ struct CookDetailView: View {
                 NavigationLink(destination: EditCookView(thisCook: cook)) {
                     Text("Edit")
                 }
-                Text(cook.name)
-                Text(cook.type)
-                Text(cook.weight)
+                Text(cook.name ?? "")
+                Text(cook.type ?? "")
+                Text(cook.weight ?? "")
                 Text("\(cook.date, formatter: self.dateFormatter)")
             }
         //}

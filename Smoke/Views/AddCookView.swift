@@ -9,11 +9,16 @@
 import SwiftUI
 
 struct AddCookView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-    @State var addCookVM = AddCookViewModel()
-    @State var cookDate = Date()
-    @State var cutName = ""
-    @State var weight = ""
+    @Environment(\.presentationMode) var presentationMode
+    
+    @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
+    
+    @State private var newCookDate = Date()
+    @State private var newCutName = ""
+    @State private var newCutWeight = ""
+    @State private var newCutType = ""
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -26,18 +31,18 @@ struct AddCookView: View {
         //NavigationView {
             Form{
                 Section {
-                    TextField("Enter Cut", text: $cutName)
-                    TextField("Weight", text: $weight)
+                    TextField("Enter Cut", text: self.$newCutName)
+                    TextField("Enter Weight", text: self.$newCutWeight)
                 }
                 
                 Section{
                     
-                    DatePicker(selection: $cookDate) {
+                    DatePicker(selection: $newCookDate) {
                         Text("Cook Date:")
                     }
                     
                     
-                    Picker(selection: self.$addCookVM.type, label: Text("")) {
+                    Picker(selection: self.$newCutType, label: Text("")) {
                         Text("Beef").tag("Beef")
                         Text("Poultry").tag("Poultry")
                         Text("Pork").tag("Pork")
@@ -47,23 +52,37 @@ struct AddCookView: View {
                     
                 HStack {
                     Spacer()
-                    Button(action: {
-                        self.addCookVM.date = self.cookDate
-                        self.addCookVM.name = self.cutName
-                        self.addCookVM.weight = self.weight
-                        self.addCookVM.saveCook()
-                    }) {
-                        Text("Add to log")
-                    }.padding(8)
-                        .foregroundColor(Color.white)
-                        .background(Color.green)
-                        .cornerRadius(10)
                     
-                    Spacer()
-                }
-            }.padding()
-            .navigationBarTitle("Add Cook")
-        //}
+                    Button(action: ({
+                        // ❇️ Initializes new BlogIdea and saves using the @Environment's managedObjectContext
+                        let cook = CookData(context: self.managedObjectContext)
+                        cook.name = self.newCutName
+                        cook.weight = self.newCutWeight
+                        cook.date = self.newCookDate
+                        cook.type = self.newCutType
+                        
+                        do {
+                            try self.managedObjectContext.save()
+                        } catch {
+                            print(error)
+                        }
+                        
+                        // ℹ️ Reset the temporary in-memory storage variables for the next new blog idea!
+                        self.newCutName = ""
+                        self.newCutWeight = ""
+                        
+                        self.presentationMode.wrappedValue.dismiss()
+                    })) {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundColor(.green)
+                                .imageScale(.large)
+                            Text("Add Cook")
+                        }
+                    }
+                    .padding()
+                }.navigationBarTitle("Add Cook")
+        }
     }
 }
 

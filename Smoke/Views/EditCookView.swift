@@ -9,25 +9,68 @@
 import SwiftUI
 
 struct EditCookView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-    var thisCook: CookViewModel
-    @State var name = ""
+    @Environment(\.presentationMode) var presentationMode
+    
+    var thisCook: CookData
+    @State var updatedName = ""
+    @State var updatedWeight = ""
+    @State var updatedType = ""
+    @State var updatedDate = Date()
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }
     
     
     var body: some View {
         Form {
-            VStack {
-                TextField("\(thisCook.name)", text: $name)
+            Section {
+                TextField("Cut Name", text: $updatedName).onAppear {
+                    self.updatedName = self.thisCook.name ?? ""
+                }
+                
+                TextField("Weight", text: $updatedWeight).onAppear {
+                    self.updatedWeight = self.thisCook.weight ?? ""
+                }
+                
+                Section{
+                    
+                    DatePicker(selection: $updatedDate) {
+                        Text("Cook Date:")
+                    }
+                    
+                    
+                    Picker(selection: $updatedType, label: Text("")) {
+                        Text("Beef").tag("Beef")
+                        Text("Poultry").tag("Poultry")
+                        Text("Pork").tag("Pork")
+                        Text("Seafood").tag("Seafood")
+                    }.pickerStyle(SegmentedPickerStyle())
+                }
             }
             
             
             HStack {
                 Spacer()
                 Button(action: {
-                    self.thisCook.name = self.name
-                    AddCookViewModel().saveCook()
+                    self.thisCook.name = self.updatedName
+                    self.thisCook.weight = self.updatedWeight
+                    self.thisCook.type = self.updatedType
+                    self.thisCook.date = self.updatedDate
+                    
+                    do {
+                        try self.managedObjectContext.save()
+                    } catch {
+                        print(error)
+                    }
+                    
+                    self.presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Add to log")
+                    Text("Save Changes")
                 }.padding(8)
                     .foregroundColor(Color.white)
                     .background(Color.green)

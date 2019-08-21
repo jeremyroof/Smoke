@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-    @ObservedObject var cookListVM: CookListViewModel
+    @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -19,15 +20,16 @@ struct ContentView: View {
     }
     
     
-    init() {
-        self.cookListVM = CookListViewModel()
-    }
-    
-    
     private func delete(at offsets: IndexSet) {
         offsets.forEach { index in
-            let cookVM = self.cookListVM.cooks[index]
-            self.cookListVM.deleteCook(cookVM)
+            let cookToDelete = self.cooks[index]
+            self.managedObjectContext.delete(cookToDelete)
+            
+            do {
+                try self.managedObjectContext.save()
+            } catch {
+                print(error)
+            }
         }
     }
     
@@ -43,29 +45,17 @@ struct ContentView: View {
                         Text("Start a new cook")
                     }.font(.title)
                         .padding(.leading)
-                    
-                    Spacer()
-                    
-                    
-                    // List Reload Button
-                    Button(action: {
-                        self.cookListVM.fetchAllCooks()
-                    }) {
-                        Image(systemName: "arrow.counterclockwise.circle")
-                            .imageScale(.large)
-                    }.padding(.trailing)
-                        .font(.subheadline)
                 }
                 
                 List {
-                    ForEach(self.cookListVM.cooks) { cook in
+                    ForEach(self.cooks) { cook in
                         NavigationLink(destination: CookDetailView(cook: cook)) {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text(cook.name)
+                                Text(cook.name!)
                                     .font(.title)
                                 
                                 HStack {
-                                    Text(cook.type)
+                                    Text(cook.type ?? "")
                                         .font(.subheadline)
                                         .padding(.leading)
                                     
