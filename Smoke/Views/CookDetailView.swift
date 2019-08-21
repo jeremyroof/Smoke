@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CookDetailView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) var presentationMode
     @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
     
     

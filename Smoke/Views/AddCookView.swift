@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct AddCookView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -15,7 +16,7 @@ struct AddCookView: View {
     
     @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
     
-    @State private var newCookDate = Date()
+    @ObservedObject private var newCookDate = MasterDate()
     @State private var newCutName = ""
     @State private var newCutWeight = ""
     @State private var newCutType = ""
@@ -37,7 +38,7 @@ struct AddCookView: View {
                 
                 Section{
                     
-                    DatePicker(selection: $newCookDate) {
+                    DatePicker(selection: $newCookDate.theDate) {
                         Text("Cook Date:")
                     }
                     
@@ -58,7 +59,7 @@ struct AddCookView: View {
                         let cook = CookData(context: self.managedObjectContext)
                         cook.name = self.newCutName
                         cook.weight = self.newCutWeight
-                        cook.date = self.newCookDate
+                        cook.date = self.newCookDate.theDate
                         cook.type = self.newCutType
                         
                         do {
@@ -85,6 +86,18 @@ struct AddCookView: View {
         }
     }
 }
+
+
+class MasterDate: ObservableObject {
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
+    
+    @Published var theDate =  Date()
+}
+
+
+
 
 #if DEBUG
 struct AddCookView_Previews: PreviewProvider {

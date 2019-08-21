@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
-    
+    @Environment(\.presentationMode) var presentationMode
     @FetchRequest(fetchRequest: CookData.allCooksFetchRequest()) var cooks: FetchedResults<CookData>
     
     var dateFormatter: DateFormatter {

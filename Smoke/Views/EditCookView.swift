@@ -37,10 +37,14 @@ struct EditCookView: View {
                     self.updatedWeight = self.thisCook.weight ?? ""
                 }
                 
+                
+                
                 Section{
                     
                     DatePicker(selection: $updatedDate) {
                         Text("Cook Date:")
+                    }.onAppear() {
+                        self.updatedDate = self.thisCook.date
                     }
                     
                     
@@ -50,6 +54,7 @@ struct EditCookView: View {
                         Text("Pork").tag("Pork")
                         Text("Seafood").tag("Seafood")
                     }.pickerStyle(SegmentedPickerStyle())
+                    
                 }
             }
             
